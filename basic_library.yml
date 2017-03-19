@@ -7,7 +7,7 @@
    - name: "python"
      yum: name=libselinux-python state=latest
    
-   - name: "基本インストール"
+   - name: "basic library"
      yum: name={{item}} state=latest
      with_items:
         - man
