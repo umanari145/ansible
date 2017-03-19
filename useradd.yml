@@ -1,0 +1,8 @@
+- hosts: target
+  remote_user: root
+  tasks: 
+   - name: "add a new user"
+     user: name={{item.user_name}} password={{item.user_password}} state=present
+     with_items:
+       #password は生がダメなため openssl passwd -1 '入れたいパスワード本体'
+       - { user_name: 'tarou', user_password: '$1$ZO86ltb6$hUWh7Ha2LoeUDSdF9nUNz/' }
