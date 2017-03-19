@@ -1,0 +1,29 @@
+- hosts: all
+  remote_user: root
+  tasks: 
+   - name: "yum update"
+     command: "yum -y update"
+
+   - name: "python"
+     yum: name=libselinux-python state=latest
+   
+   - name: "基本インストール"
+     yum: name={{item}} state=latest
+     with_items:
+        - man
+        - vim-enhanced
+        - wget 
+        - git 
+        - jwhois 
+        - gcc 
+        - make 
+        - autoconf 
+        - patch  
+        - curl-devel 
+        - openssl-devel 
+        - mod_ssl 
+        - mysql-devel 
+        - httpd-devel 
+        - automake 
+        - sysstat
+        - iotop
