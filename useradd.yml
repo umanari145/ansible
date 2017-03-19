@@ -4,4 +4,6 @@
     - ./vars/userinfo.yml
   tasks: 
    - name: "add a new user"
-     user: name={{userinfo.user.user_name}} password={{userinfo.user.user_password}} state=present
+     user: name={{userinfo.user.user_name}} password={{userinfo.user.user_password}} groups={{userinfo.user.group}}
+   - name: "change /etc/sudoer"   
+     lineinfile: dest=/etc/sudoers.d/{{ userinfo.user.user_name }} line="{{ userinfo.user.user_name }} ALL=(ALL) NOPASSWD:ALL" create=yes owner=root group=root mode=0440

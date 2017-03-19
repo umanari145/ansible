@@ -11,6 +11,7 @@
      yum: name={{item}} state=latest
      with_items:
         - man
+        - sudo
         - vim-enhanced
         - wget 
         - git 

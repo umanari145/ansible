@@ -2,4 +2,4 @@ userinfo:
   user:
     user_name: tarou
     user_password: $1$ZO86ltb6$hUWh7Ha2LoeUDSdF9nUNz/
-
+    group: apache
