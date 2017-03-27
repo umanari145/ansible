@@ -1,7 +1,7 @@
 - hosts: target
   remote_user: root
   tasks: 
-  - name: "basic library"
+  - name: "install library yum"
     yum: name={{item}} state=latest
     with_items:
        - cpan
@@ -17,7 +17,7 @@
        - ImageMagick
        - ImageMagick-perl
        - libyaml-devel
-  
+ 
   - name: "download cpanm"
     get_url: url=https://cpanmin.us/ dest=/tmp/cpanm.pl mode=755
 
@@ -59,3 +59,14 @@
        - YAML
        - XML::LibXML
        - Text::PDF::FlateDecode
+
+  - name: "install cpanm GD force"
+     command: cpanm --force GD
+
+  - name: "install cpan-modules with cpanm"
+    cpanm: name={{item}} 
+    with_items:
+       - Date::Simple
+       - Class::ISA.pm
+       - YAML
+       - DBD::mysql
