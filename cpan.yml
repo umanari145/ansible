@@ -61,7 +61,7 @@
        - Text::PDF::FlateDecode
 
   - name: "install cpanm GD force"
-     command: cpanm --force GD
+    command: cpanm --force GD
 
   - name: "install cpan-modules with cpanm"
     cpanm: name={{item}} 
