@@ -1,0 +1,11 @@
+- hosts: target
+  remote_user: root
+  tasks: 
+   - name: sumple cron minutely
+     cron: name="check dirs m" job="ls -lah >> /tmp/sumple_cron_minutely.log"
+
+   - name: sumple cron hourly
+     cron: name="check dirs h" minute="55" job="ls -lah >> /tmp/sumple_cron_hourly.log"
+
+
+    
