@@ -1,0 +1,19 @@
+- hosts: target
+  remote_user: root
+  tasks: 
+   - name: " import remi-repo rpm "
+     yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+   
+   - name: "install php"
+     yum: name={{item}} state=latest enablerepo=remi,remi-php56
+     with_items:
+        - php
+        - php-opcache
+        - php-devel
+        - php-mbstring
+        - php-mcrypt
+        - php-mysqlnd
+        - php-phpunit-PHPUnit
+        - php-pecl-xdebug
+        - php-pecl-xhprof
+        - php-intl
