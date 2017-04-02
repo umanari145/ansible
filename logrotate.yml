@@ -1,0 +1,9 @@
+- hosts: target
+  remote_user: root
+  tasks: 
+   - name: "logrotate list"
+     copy: src=./template/logrotate/{{item.path}}  dest=/etc/logrotate.d/{{item.dest_path}} owner=root group=root mode=0644
+     with_items:
+      - { path: 'iotop', dest_path: 'iotop'  }
+      - { path: 'pstop', dest_path: 'pstop'  }
+      - { path: 'wmslog', dest_path: 'wmslog'  }
