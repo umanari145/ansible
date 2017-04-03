@@ -1,34 +1,35 @@
 - hosts: target
   remote_user: root
-  tasks: 
+  tasks:
    - name: "yum update"
      command: "yum -y update"
 
    - name: "python"
      yum: name=libselinux-python state=latest
-   
+     tags: python
+
    - name: "basic library"
      yum: name={{item}} state=latest
      with_items:
         - man
         - sudo
         - vim-enhanced
-        - wget 
-        - git 
-        - jwhois 
-        - gcc 
-        - make 
-        - autoconf 
-        - patch  
-        - curl-devel 
-        - openssl-devel 
-        - mod_ssl 
-        - mysql-devel 
-        - httpd-devel 
-        - automake 
+        - wget
+        - git
+        - jwhois
+        - gcc
+        - make
+        - autoconf
+        - patch
+        - curl-devel
+        - openssl-devel
+        - mod_ssl
+        - mysql-devel
+        - httpd-devel
+        - automake
         - sysstat
         - iotop
-   
+
    - name: "repository"
      yum: name={{item}}
      with_items:
