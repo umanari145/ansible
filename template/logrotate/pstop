@@ -1,7 +1,0 @@
-/var/log/ps.log {
-    create
-    rotate 10
-    daily
-    missingok
-    dateext
-}

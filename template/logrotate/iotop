@@ -1,7 +1,0 @@
-/var/log/iotop.log {
-    create
-    rotate 10
-    daily
-    missingok
-    dateext
-}

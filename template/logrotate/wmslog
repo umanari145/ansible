@@ -1,8 +1,0 @@
-/var/log/*_wms.log {
-    create
-    rotate 10
-    daily
-    missingok
-    compress
-    dateext
-}
