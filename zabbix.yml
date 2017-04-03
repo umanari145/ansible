@@ -1,0 +1,27 @@
+- hosts: target
+  remote_user: root
+  tasks:
+   - name: "repository"
+     yum: name=http://repo.zabbix.com/zabbix/3.0/rhel/6/x86_64/zabbix-release-3.0-1.el6.noarch.rpm
+
+   - name: "zabbix-agent"
+     yum: name=zabbix-agent state=latest
+
+   - name: "zabbix_agent_config cp"
+     command: " cp -ip /etc/zabbix/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf.org "
+
+   - name: "zabbix_agent_config replace"
+     replace: dest='/etc/zabbix/zabbix_agentd.conf' regexp='{{item.pattern}}' replace='{{item.replaced_value}}' backup=no
+     with_items:
+       - { pattern: 'Server=127.0.0.1', replaced_value: 'Server={{serverIP}}' }
+       - { pattern: 'ServerActive=127.0.0.1', replaced_value: 'ServerActive={{serverIP}}' }
+     tags: zabbix-agent-conf-replace
+
+   - name: "zabbix-agent-config add"
+     lineinfile: dest='/etc/zabbix/zabbix_agentd.conf' line='{{item.add_value}}' backup=no
+     with_items:
+       - { add_value: 'UserParameter=glassfish,ps -ef|grep glassfish|grep -v grep|wc -l' }
+       - { add_value: 'UserParameter=fcgiwrap,ps -ef|grep fcgiwrap|grep -v grep|wc -l' }
+     tags: zabbix-agent-conf-add
+
+   - service: name=zabbix-agent state=started enabled=yes
