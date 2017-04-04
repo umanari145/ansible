@@ -1,6 +1,0 @@
-userinfo:
-  user:
-    user_name: tarou
-    #openssl passwd -salt hogehoge(←任意の文字 ) -1 tarou_pass(使いたいパスワード)
-    user_password: $1$hogehoge$ftExpo7EZrgrPs1p7YcmU/
-    group: apache

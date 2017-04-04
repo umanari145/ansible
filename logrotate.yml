@@ -1,8 +1,0 @@
-- hosts: target
-  remote_user: root
-  tasks:
-   - template: src=./template/logrotate/logrotate.j2 dest=/etc/logrotate.d/{{item.dest_path}} owner=root group=root mode=0644
-     with_items:
-      - { name: 'iotop.log', dest_path: 'iotop'   , span: 10 , period1: 'daily', period2: 'dateext' }
-      - { name: 'pstop.log', dest_path: 'pstop'   , span: 10 , period1: 'daily', period2: 'dateext' }
-      - { name: '*_wms.log', dest_path: 'wmslog' , span: 10 , period1: 'daily', compress: 'compress', period2: 'dateext'}
