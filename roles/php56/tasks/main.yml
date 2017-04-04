@@ -15,4 +15,12 @@
       - php-pecl-xdebug
       - php-pecl-xhprof
       - php-intl
+      - php-common
    tags: install_php
+
+ - name: 'install_php-fpm'
+   yum: name=php-fpm state=latest
+   tags: intall_php_fpm
+
+ - service: name=php-fpm state=started enabled=yes
+   tags: service_php_fpm
