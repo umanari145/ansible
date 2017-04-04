@@ -10,7 +10,7 @@
    service: name=mysqld state=started enabled=yes
    tags: service_mysql_on
 
- - name: " my.cnf cp"
+ - name: "my.cnf cp"
    command: " cp -ip /etc/my.cnf /etc/my.cnf.org "
    tags: my.conf_cp
 
@@ -23,10 +23,10 @@
     - { section: 'mysqld_safe', option: 'default-character-set', replaced_value: 'utf8'}
    tags: my.conf_replace
 
- - name: " create mysql_db"
+ - name: "create mysql_db"
    mysql_db: name={{dbname}} state=present encoding=utf8
    tags: create_db
 
- - name: " create mysql_user"
+ - name: "create mysql_user"
    mysql_user: name={{dbuser}} password={{dbpass}} priv={{dbname}}.*:ALL host={{dbhost}} state=present
    tags: create_db_user

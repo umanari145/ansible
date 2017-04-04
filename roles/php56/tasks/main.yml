@@ -19,8 +19,24 @@
    tags: install_php
 
  - name: 'install_php-fpm'
-   yum: name=php-fpm state=latest
+   #リポジトリ指定しないと古いリポジトリから読み込んでしまう
+   yum: name=php-fpm state=latest enablerepo=remi-php56,remi,epel
    tags: intall_php_fpm
 
  - service: name=php-fpm state=started enabled=yes
    tags: service_php_fpm
+
+ - name: "php-fpm_cp "
+   command: " cp -ip /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.org "
+   tags: php_fpm_cp
+
+ ##動かないので修正予定
+ - name: php-fpm_conf replace
+   ini_file: dest='/etc/php-fpm.d/www.conf' section ='{{item.section}}'  option='{{item.option}}'  value='{{item.replaced_value}}' backup=no
+   with_items:
+    - { section: 'www', option: 'user', replaced_value: 'nginx'  }
+    - { section: 'www', option: 'group', replaced_value: 'nginx'  }
+    - { section: 'www', option: 'listen', replaced_value: '/var/run/php-fpm/php-fpm.sock'  }
+    - { section: 'www', option: 'listen.owner', replaced_value: 'nginx'}
+    - { section: 'www', option: 'listen.group', replaced_value: 'nginx'}
+   tags: php_fpm_conf_replace
