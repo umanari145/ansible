@@ -2,7 +2,6 @@
   remote_user: remote_user
   become: yes
   roles:
-    - basic
-    - useradd
-    - vim
-    - ssh
+    - cron
+    - logrotate
+    - zabbix

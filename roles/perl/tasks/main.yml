@@ -1,0 +1,33 @@
+ - name: "install perl perl-CGI "
+   yum: name={{item}} state=latest
+   with_items:
+      - perl
+      - perl-CGI
+   tags: perl_install
+
+ - name: "import epel-repo rpm "
+   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+   tags: import_repo
+
+ - name: "install span-fcgi fcgi-devel "
+   yum: name={{item}} state=latest
+   with_items:
+      - spawn-fcgi
+      - fcgi-devel
+   tags: install_fcgi
+
+ - name: "install fcgiwrap "
+   shell: >
+     cd /usr/local/src;
+     wget --no-check-certificate https://worklog.be/wp-content/uploads/2015/09/fcgiwrap-1.1.0-5.tar.gz;
+     tar xzvf fcgiwrap-1.1.0-5.tar.gz;
+     cd gnosek-fcgiwrap-66e7b7d/;
+     autoreconf -i;
+     ./configure --prefix=/usr;
+     make;
+     make install;
+   tags: compile_fcgi
+
+ - name: "modify span-fcgi"
+   lineinfile: dest='/etc/sysconfig/spawn-fcgi' line='OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 8999 -C 32 -F 32 -P /var/run/spawn-fcgi.pid -- /usr/sbin/fcgiwrap"' backup=yes
+   tags: span-fcgi_add

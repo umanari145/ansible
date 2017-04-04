@@ -1,0 +1,76 @@
+ - name: "install library yum"
+   yum: name={{item}} state=latest
+   with_items:
+      - cpan
+      - libyaml-devel
+      - perl-core
+      - gd
+      - gd-devel
+      - mod_perl
+      - poppler
+      - poppler-utils
+      - libxml2-devel
+      - perl-XML-Simple
+      - ImageMagick
+      - ImageMagick-perl
+      - libyaml-devel
+   tags: install_perl_lib
+
+ - name: "download cpanm"
+   get_url: url=https://cpanmin.us/ dest=/tmp/cpanm.pl mode=755
+   tags: download_cpanm
+
+ - name: "install cpanm so that we can use the ansible cpanm module"
+   command: perl cpanm.pl App::cpanminus
+   args:
+     chdir: /tmp/
+     creates: /usr/local/bin/cpanm
+   tags: install_cpanm
+
+ - name: "add cpanm symbolic link to /usr/bin/"
+   file: src=/usr/local/bin/cpanm  dest=/usr/bin/cpanm  state=link
+   tags: make_symbolick_link
+
+ - name: "install cpan-modules with cpanm"
+   cpanm: name={{item}}
+   with_items:
+      - Test::MockModule
+      - Archive::Zip
+      - Cache::Memcached::Fast
+      - Params::Validate
+      - CGI::Session::Driver::memcached
+      - CGI::Session::Serialize::freezethaw
+      - FreezeThaw
+      - DateTime
+      - DateTime::Format::Strptime
+      - DateTime::Format::MySQL
+      - JSON
+      - WebService::Dropbox
+      - Time::Piece
+      - Text::CSV_XS
+      - LWP::UserAgent
+      - XML::Simple
+      - IO::Wrap
+      - HTML::Strip
+      - Class::Accessor
+      - DateTime::Helpers
+      - GD::Barcode::QRcode
+      - Compress::Zlib
+      - Cache::Memcached::Fast
+      - YAML
+      - XML::LibXML
+      - Text::PDF::FlateDecode
+   tags: install_cpan
+
+ - name: "install cpanm GD force"
+   command: cpanm --force GD
+   tags: install_cpan_gd
+
+ - name: "install cpan-modules with cpanm"
+   cpanm: name={{item}}
+   with_items:
+      - Date::Simple
+      - Class::ISA.pm
+      - YAML
+      - DBD::mysql
+   tags: install_cpan_module

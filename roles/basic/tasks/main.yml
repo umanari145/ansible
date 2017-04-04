@@ -1,0 +1,38 @@
+ - name: "yum update"
+   command: "yum -y update"
+   tags: yum_update
+
+ - name: "python"
+   yum: name=libselinux-python state=latest
+   tags: python
+
+ - name: "basic library"
+   yum: name={{item}} state=latest
+   with_items:
+      - man
+      - sudo
+      - vim-enhanced
+      - wget
+      - git
+      - tree
+      - jwhois
+      - gcc
+      - make
+      - autoconf
+      - patch
+      - curl-devel
+      - openssl-devel
+      - mod_ssl
+      - mysql-devel
+      - httpd-devel
+      - automake
+      - sysstat
+      - iotop
+   tags: basic_library
+
+ - name: "repository"
+   yum: name={{item}}
+   with_items:
+      - http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+      - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+   tags: repo

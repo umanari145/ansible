@@ -1,0 +1,8 @@
+ - name: "install nginx"
+   yum: name=nginx state=latest enablerepo=epel
+   tags: install_nginx
+
+ - template: src=./template/nginx/nginx.j2 dest=/etc/nginx/conf.d/{{item.hostname}}.conf owner=nginx group=nginx mode=0644
+   with_items:
+    - { hostname: 'sample_host' }
+   tags: nginx_conf

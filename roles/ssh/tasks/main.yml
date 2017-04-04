@@ -1,0 +1,17 @@
+ - name: "sshd_config cp"
+   command: " cp -ip /etc/ssh/sshd_config /etc/ssh/sshd_config.org "
+   tags: sshd_conf_cp
+
+ - name: "sshd_config replace"
+   replace: dest='/etc/ssh/sshd_config' regexp='{{item.pattern}}' replace='{{item.replaced_value}}' backup=no
+   with_items:
+     - { pattern: '#Port 22', replaced_value: 'Port 2222' }
+     - { pattern: 'PasswordAuthentication yes', replaced_value: 'PasswordAuthentication no' }
+     - { pattern: '#PermitRootLogin yes', replaced_value: 'PermitRootLogin no' }
+   tags: sshd_conf_replace
+
+ - name: "sshd_config add"
+   lineinfile: dest='/etc/ssh/sshd_config' line='{{item.add_value}}' backup=no
+   with_items:
+     - { add_value: 'AllowUsers tarou jirou' }
+   tags: sshd_conf_add

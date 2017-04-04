@@ -1,0 +1,19 @@
+ - name: "database backup"
+   cron: name="database backp" minute="00" hour="3" job="/home/tarou/backup_wms_db.sh"
+   tags: database_back_up
+
+ - name: "iotop process log"
+   cron: name="iotop process log" minute="*/5" job="/usr/sbin/iotop -botqqqk --iter=10 |  sed -e 's/modules\/glassfish.jar.*//g'  >> /var/log/iotop.log"
+   tags: iotop
+
+ - name: "iotop log date"
+   cron: name="iotop log date" minute="*/5" job=" date  >> /var/log/ps.log"
+   tags: iotop_date
+
+ - name: "ps process log"
+   cron: name="ps proocess log" minute="*/5" job=" /usr/bin/ps -aux | sort -rk 3 | head -30 |  sed -e 's/modules\/glassfish.jar.*//g'   >> /var/log/ps.log "
+   tags: ps
+
+ - name: "log cat"
+   cron: name="log cat" minute="00" hour="2" job="/home/tarou/script/logcat.sh"
+   tags: log_cat

@@ -1,0 +1,32 @@
+ - name: "install mysql"
+   yum: name={{item}} state=latest
+   with_items:
+      - mysql
+      - mysql-server
+      - MySQL-python
+   tags: install_mysql
+
+ - name: "service mysqld on"
+   service: name=mysqld state=started enabled=yes
+   tags: service_mysql_on
+
+ - name: " my.cnf cp"
+   command: " cp -ip /etc/my.cnf /etc/my.cnf.org "
+   tags: my.conf_cp
+
+ - name: " replace  my.cnf"
+   ini_file: dest='/etc/my.cnf' section='{{item.section}}' option='{{item.option}}' value='{{item.replaced_value}}'
+   with_items:
+    - { section: 'mysql', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'client', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld_safe', option: 'default-character-set', replaced_value: 'utf8'}
+   tags: my.conf_replace
+
+ - name: " create mysql_db"
+   mysql_db: name={{dbname}} state=present encoding=utf8
+   tags: create_db
+
+ - name: " create mysql_user"
+   mysql_user: name={{dbuser}} password={{dbpass}} priv={{dbname}}.*:ALL host={{dbhost}} state=present
+   tags: create_db_user

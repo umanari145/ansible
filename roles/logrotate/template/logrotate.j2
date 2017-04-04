@@ -1,0 +1,10 @@
+/var/log/{{item.name}} {
+    create
+    rotate {{item.span}}
+    {{item.period1}}
+    missingok
+{%if item.compress is defined %}
+    {{item.compress}}
+{% endif %}
+    {{item.period2}}
+}
