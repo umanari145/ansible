@@ -2,7 +2,11 @@
   remote_user: remote_user
   become: yes
   roles:
-    - basic
-    - useradd
-    - vim
-    - ssh
+    - role: basic
+      tags: basic
+    - role: useradd
+      tags: useradd
+    - role: vim
+      tags: vim
+    - role: ssh
+      tags: ssh

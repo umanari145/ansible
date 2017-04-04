@@ -2,6 +2,9 @@
   remote_user: remote_user
   become: yes
   roles:
-    - cron
-    - logrotate
-    - zabbix
+    - role: cron
+      tags: cron
+    - role: logrotate
+      tags: logrotate
+    - role: zabbix
+      tags: zabbix

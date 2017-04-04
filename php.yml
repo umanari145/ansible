@@ -2,7 +2,11 @@
   remote_user: remote_user
   become: yes
   roles:
-    - nginx
-    - php56
-    - composer
-    - mysql
+    - role: nginx
+      tags: nginx
+    - role: php56
+      tags: php56
+    - role: composer
+      tags: composer
+    - role: mysql
+      tags: mysql

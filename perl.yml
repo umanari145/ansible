@@ -2,7 +2,11 @@
   remote_user: remote_user
   become: yes
   roles:
-    - nginx
-    - perl
-    - cpan
-    - mysql
+    - role: nginx
+      tags: nginx
+    - role: perl
+      tags: perl
+    - role: cpan
+      tags: cpan
+    - role: mysql
+      tags: mysql
