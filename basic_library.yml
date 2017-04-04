@@ -16,6 +16,7 @@
         - vim-enhanced
         - wget
         - git
+        - tree
         - jwhois
         - gcc
         - make
