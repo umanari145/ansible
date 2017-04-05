@@ -1,0 +1,8 @@
+- hosts: target
+  remote_user: remote_user
+  become: yes
+  roles:
+    - role: node
+      tags: node
+    - role: bower
+      tags: bower

@@ -1,0 +1,15 @@
+ - name: "install nvm"
+   git: repo=https://github.com/creationix/nvm.git dest=/root/.nvm
+   tags: donwload_node
+
+ - name: "source nvm in ~/.profile"
+   lineinfile: dest=~/.bash_profile line="source ~/.nvm/nvm.sh" create=yes
+   tags: source_profile
+
+ - name: "install {{ nvm_node_version }}"
+   command: sudo -iu  {{nvm_user}} nvm install {{ nvm_node_version }}
+   tags: install_nvm
+
+ - name: "set default node version to {{ nvm_node_version }}"
+   command: sudo -iu {{nvm_user}} nvm alias default {{ nvm_node_version }}
+   tags: set_version
