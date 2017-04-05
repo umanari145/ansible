@@ -30,13 +30,12 @@
    command: " cp -ip /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.org "
    tags: php_fpm_cp
 
- ##動かないので修正予定
  - name: php-fpm_conf replace
-   ini_file: dest='/etc/php-fpm.d/www.conf' section ='{{item.section}}'  option='{{item.option}}'  value='{{item.replaced_value}}' backup=no
+   replace: dest='/etc/php-fpm.d/www.conf' regexp='{{item.pattern}}'  replace='{{item.replaced_value}}' backup=no
    with_items:
-    - { section: 'www', option: 'user', replaced_value: 'nginx'  }
-    - { section: 'www', option: 'group', replaced_value: 'nginx'  }
-    - { section: 'www', option: 'listen', replaced_value: '/var/run/php-fpm/php-fpm.sock'  }
-    - { section: 'www', option: 'listen.owner', replaced_value: 'nginx'}
-    - { section: 'www', option: 'listen.group', replaced_value: 'nginx'}
+    - { pattern: 'user = apache', replaced_value: 'user = nginx'  }
+    - { pattern: 'group = apache', replaced_value: 'user = nginx'  }
+    - { pattern: 'listen = 127.0.0.1:9000', replaced_value: 'listen = /var/run/php-fpm/php-fpm.sock' }
+    - { pattern: ';listen.owner = nobody', replaced_value: 'listen.owner = nginx'}
+    - { pattern: ';listen.group = nobody', replaced_value: 'listen.group = ntinx'}
    tags: php_fpm_conf_replace

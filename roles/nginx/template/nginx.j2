@@ -5,8 +5,7 @@ server {
     client_max_body_size 20M;
 
     #charset koi8-r;
-    access_log  /var/log/nginx/log/host.access.log  main;
-
+    
     location ~ /{{item.hostname}}/(img|css|js|files)/(.+)$ {
         root /var/nginx/{{item.hostname}}/webroot;
         try_files /$1/$2 =404;
