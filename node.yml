@@ -1,5 +1,4 @@
 - hosts: target
-  remote_user: matsumoto
   become: yes
   roles:
     - role: node

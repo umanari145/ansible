@@ -1,5 +1,5 @@
  - name: "database backup"
-   cron: name="database backp" minute="00" hour="3" job="/home/tarou/backup_wms_db.sh"
+   cron: name="database backp" minute="00" hour="3" job="{{shell_dir}}backup_wms_db.sh"
    tags: database_back_up
 
  - name: "iotop process log"
@@ -15,5 +15,5 @@
    tags: ps
 
  - name: "log cat"
-   cron: name="log cat" minute="00" hour="2" job="/home/tarou/script/logcat.sh"
+   cron: name="log cat" minute="00" hour="2" job="{{shell_dir}}logcat.sh"
    tags: log_cat
