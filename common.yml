@@ -7,3 +7,5 @@
       tags: logrotate
     - role: zabbix
       tags: zabbix
+    - role: git
+      tags: git
