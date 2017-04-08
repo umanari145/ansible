@@ -1,5 +1,5 @@
  - name: "remove yum git"
-   yum: name=git state=remove
+   yum: name=git state=removed
    tags: remove_git
 
  - name: "import yum"
@@ -15,11 +15,11 @@
 
  - name: "install git"
    shell: >
-     cd /usr/local
-     wget https://www.kernel.org/pub/software/scm/git/git-{{git_version}}.tar.gz
-     tar zxvf git-{{git_version}}.tar.gz
-     cd git-{{git_version}}
-     ./configure --prefix=/usr/local
-     make prefix=/usr/local all
+     cd /usr/local;
+     wget https://www.kernel.org/pub/software/scm/git/git-{{git_version}}.tar.gz;
+     tar zxvf git-{{git_version}}.tar.gz;
+     cd git-{{git_version}};
+     ./configure --prefix=/usr/local;
+     make prefix=/usr/local all;
      make prefix=/usr/local install;
    tags: install_git
