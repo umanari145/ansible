@@ -33,6 +33,6 @@
  - name: "repository"
    yum: name={{item}}
    with_items:
-      - http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+      - epel-release
       - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
    tags: repo

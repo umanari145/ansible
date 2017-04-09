@@ -1,5 +1,4 @@
 - hosts: target
-  become: yes
   roles:
     - role: basic
       tags: basic
