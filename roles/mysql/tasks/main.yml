@@ -17,10 +17,10 @@
  - name: " replace  my.cnf"
    ini_file: dest='/etc/my.cnf' section='{{item.section}}' option='{{item.option}}' value='{{item.replaced_value}}'
    with_items:
-    - { section: 'mysql', option: 'character-set-server', replaced_value: 'utf8'  }
     - { section: 'mysql', option: 'default-character-set', replaced_value: 'utf8'  }
-    - { section: 'client', option: 'default-character-set', replaced_value: 'utf8'  }
     - { section: 'mysqld', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld', option: 'character-set-server', replaced_value: 'utf8'  }
+    - { section: 'client', option: 'default-character-set', replaced_value: 'utf8'  }
     - { section: 'mysqld_safe', option: 'default-character-set', replaced_value: 'utf8'}
    tags: my.conf_replace
 
