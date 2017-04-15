@@ -1,0 +1,12 @@
+ - name: "install cakephp3 "
+   vars:
+     appname: sampleApp
+     vardir: /var/www/html
+
+   shell: >
+     cd {{vardir}};
+     composer create-project --prefer-dist cakephp/app {{appname}};
+     cd {{vardir}}/{{appname}};
+     composer install;
+     composer update;
+   tags: install_cakephp3

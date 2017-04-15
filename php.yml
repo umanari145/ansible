@@ -9,3 +9,5 @@
       tags: composer
     - role: mysql
       tags: mysql
+    - role: cakephp
+      tags: cakephp
