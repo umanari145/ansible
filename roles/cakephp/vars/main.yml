@@ -1,0 +1,6 @@
+appname: sampleApp
+vardir: /var/www/html
+dbhost: localhost
+dbname: sample_db
+dbuser: sample_user
+dbpass: sample_pass

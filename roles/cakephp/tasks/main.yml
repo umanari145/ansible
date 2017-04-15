@@ -1,8 +1,4 @@
  - name: "install cakephp3 "
-   vars:
-     appname: sampleApp
-     vardir: /var/www/html
-
    shell: >
      cd {{vardir}};
      composer create-project --prefer-dist cakephp/app {{appname}};
@@ -10,3 +6,18 @@
      composer install;
      composer update;
    tags: install_cakephp3
+
+ - template: src=./template/app.j2  dest='{{item.path}}/config/app.php'
+   with_items:
+    - { path: "{{vardir}}/{{appname}}" , dbhost: "{{dbhost}}" , dbname: "{{dbname}}" , dbuser: "{{dbuser}}" , dbpass: "{{dbpass}}" }
+   tags: set_app
+
+ - name: "bootstrap_config cp"
+   command: " cp -ip {{vardir}}/{{appname}}/config/bootstrap.php {{vardir}}/{{appname}}/config/bootstrap.php.org "
+   tags: bootstrap_config_cp
+
+ - name: "bootstrap_config replace"
+   replace: dest="{{vardir}}/{{appname}}/config/bootstrap.php" regexp='{{item.pattern}}' replace='{{item.replaced_value}}' backup=no
+   with_items:
+     - { pattern: 'UTC', replaced_value: 'Asia/Tokyo' }
+   tags: bootstrap_replace
