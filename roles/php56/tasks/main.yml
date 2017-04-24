@@ -16,6 +16,7 @@
       - php-pecl-xhprof
       - php-intl
       - php-common
+      - php-pecl-memcached
    tags: install_php
 
  - name: 'install_php-fpm'
