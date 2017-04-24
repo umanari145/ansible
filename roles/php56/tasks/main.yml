@@ -16,8 +16,16 @@
       - php-pecl-xhprof
       - php-intl
       - php-common
-      - php-pecl-memcached
    tags: install_php
+   
+ - name: 'install_memcached'
+   #リポジトリ指定しないと古いリポジトリから読み込んでしまう
+   yum: name={{item}} state=latest enablerepo=remi-php56,remi,epel
+   with_items:
+      - memcached
+      - php-pecl-memcached
+   tags: intall_memcached
+
 
  - name: 'install_php-fpm'
    #リポジトリ指定しないと古いリポジトリから読み込んでしまう
