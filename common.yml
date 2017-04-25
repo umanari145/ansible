@@ -11,3 +11,5 @@
       tags: git
     - role: port
       tags: port
+    - role: alias
+      tags: alias

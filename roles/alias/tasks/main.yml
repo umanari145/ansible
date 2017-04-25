@@ -1,0 +1,13 @@
+ - name: "regist_alias"
+   lineinfile: dest=/etc/profile line={{item}}
+   with_items:
+      - alias ls='ls -latr --color=auto'
+      - alias rm='rm -i'
+      - alias mv='mv -i'
+      - alias cp='cp -ipr'
+      - alias grep='grep --color'
+   tags: regist_alias
+
+ - name: "regist_alias_exe"
+   shell: "source /etc/profile"
+   tags: regist_alias_exe
