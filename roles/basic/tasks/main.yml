@@ -15,7 +15,6 @@
       - wget
       - git
       - tree
-      - jwhois
       - gcc
       - make
       - autoconf
