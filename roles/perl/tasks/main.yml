@@ -6,7 +6,7 @@
    tags: perl_install
 
  - name: "import epel-repo rpm "
-   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+   yum: name= epel-release
    tags: import_repo
 
  - name: "install span-fcgi fcgi-devel "
