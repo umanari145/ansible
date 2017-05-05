@@ -1,0 +1,49 @@
+ - name: "install ruby lib"
+   yum: name={{item}} state=latest 
+   with_items:
+      - openssl-devel 
+      - readline-devel 
+      - zlib-devel 
+      - libcurl-devel
+      - gcc
+   tags: install_ruby_lib
+
+ - name: "install rbenv"
+   shell: >
+     cd /usr/local;
+     git clone git://github.com/sstephenson/rbenv.git rbenv;
+     mkdir rbenv/shims rbenv/versions rbenv/plugins;
+     groupadd rbenv;
+     chgrp -R rbenv rbenv;
+     chmod -R g+rwxXs rbenv;
+   tags: install_rbenv
+
+ - name: "install ruby-build"
+   shell: >
+     cd /usr/local/rbenv/plugins;
+     git clone git://github.com/sstephenson/ruby-build.git ruby-build;
+     chgrp -R rbenv ruby-build;
+     chmod -R g+rwxs ruby-build;
+     git clone git://github.com/sstephenson/rbenv-default-gems.git rbenv-default-gems;
+     chgrp -R rbenv rbenv-default-gems;
+     chmod -R g+rwxs rbenv-default-gems;
+   tags: install_ruby_build
+
+ - name: "regist profice"
+   lineinfile: dest=/etc/profile line={{item}}
+   with_items:
+      - export RBENV_ROOT="/usr/local/rbenv"
+      - export PATH="$RBENV_ROOT/bin:$PATH"
+      - eval "$(rbenv init -)"
+   tags: regist_profile
+
+ - name: "regist_profile_ext"
+   shell: "source /etc/profile"
+   tags: regist_profile_ext
+   
+ - name: "install ruby"
+   shell: >
+     rbenv install 2.4.0;
+     rbenv global 2.4.0;
+   tags: install_ruby
+
