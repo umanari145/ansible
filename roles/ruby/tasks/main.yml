@@ -47,3 +47,10 @@
      rbenv global 2.4.0;
    tags: install_ruby
 
+ - name: "update rubygems"
+   command: gem update --system
+   tags: update_gem
+
+ - name: "install bundler"
+   command: gem install bundler
+   tags: install_bundler
