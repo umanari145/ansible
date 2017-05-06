@@ -54,3 +54,7 @@
  - name: "install bundler"
    command: gem install bundler
    tags: install_bundler
+ 
+ - name: "install rake"
+   command: gem install rake
+   tags: install_rake
