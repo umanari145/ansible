@@ -13,3 +13,5 @@
       tags: port
     - role: alias
       tags: alias
+    - role: serverspec
+      tags: serverspec

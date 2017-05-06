@@ -1,0 +1,3 @@
+ - name: "install serverspec"
+   command: gem install serverspec
+   tags: install_serverspec
