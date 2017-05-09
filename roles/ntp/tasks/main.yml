@@ -1,0 +1,14 @@
+ - name: "set localtime "
+   command: "cp -p /usr/share/zoneinfo/Japan /etc/localtime"
+   tags: set_localtime
+
+ - name: "install ntp"
+   yum: name=ntp state=latest
+   tags: install_ntp
+
+ - name: "ntpdate"
+   shell: >
+     /etc/init.d/ntpd stop;
+     ntpdate ntp.nict.jp;
+   tags: ntpdate
+

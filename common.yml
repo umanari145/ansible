@@ -15,3 +15,5 @@
       tags: alias
     - role: serverspec
       tags: serverspec
+    - role: ntp
+      tags: ntp
