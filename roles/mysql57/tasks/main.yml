@@ -1,0 +1,37 @@
+ - name: "install mysql repo"
+   yum: name={{item}} state=latest
+   with_items:
+      - http://dev.mysql.com/doc/refman/5.7/en/checking-gpg-signature.html
+      - http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+   tags: install_mysql57_repo
+
+ - name: "install_mysql57"
+   yum: name=mysql-community-server
+   tags: install_mysql57
+
+ - name: "service mysqld on"
+   service: name=mysqld state=started enabled=yes
+   tags: service_mysqld_on
+
+ - name: "my.cnf cp"
+   command: "cp -ip /etc/my.cnf /etc/my.cnf.org "
+   tags: my.conf_cp
+
+ - name: " replace  my.cnf"
+   ini_file: dest='/etc/my.cnf' section='{{item.section}}' option='{{item.option}}' value='{{item.replaced_value}}'
+   with_items:
+    - { section: 'mysql', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld', option: 'character-set-server', replaced_value: 'utf8'  }
+    - { section: 'mysqld', option: 'default-time-zone', replaced_value: 'Asia/Tokyo' }
+    - { section: 'client', option: 'default-character-set', replaced_value: 'utf8'  }
+    - { section: 'mysqld_safe', option: 'default-character-set', replaced_value: 'utf8'}
+   tags: my.conf_replace
+
+ - name: "create mysql_db"
+   mysql_db: name={{dbname}} state=present encoding=utf8
+   tags: create_db
+
+ - name: "create mysql_user"
+   mysql_user: name={{dbuser}} password={{dbpass}} priv={{dbname}}.*:ALL host={{dbhost}} state=present
+   tags: create_db_user
