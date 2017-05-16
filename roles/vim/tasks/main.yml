@@ -7,6 +7,8 @@
    with_items:
      - { add_value: 'set number' }
      - { add_value: 'set autoindent' }
-     - { add_value: 'set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8'}
+     - { add_value: 'set encoding=utf-8'}
+     - { add_value: 'set fileencoding=utf-8'}
+     - { add_value: 'set fileencodings=utf-8,sjis,cp932,euc-jp,iso-2022-jp'}
      - { add_value: 'set fileformats=unix,dos,mac' }
    tags: vimrc_add
