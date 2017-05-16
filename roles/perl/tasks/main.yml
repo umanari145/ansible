@@ -3,6 +3,7 @@
    with_items:
       - perl
       - perl-CGI
+      - perl-DBD-MySQL
    tags: perl_install
 
  - name: "import epel-repo rpm "
