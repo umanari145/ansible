@@ -7,7 +7,7 @@
    tags: perl_install
 
  - name: "import epel-repo rpm "
-   yum: name= epel-release
+   yum: name=epel-release
    tags: import_repo
 
  - name: "install span-fcgi fcgi-devel "
