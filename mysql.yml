@@ -1,0 +1,5 @@
+- hosts: target
+  become: yes
+  roles:
+    - role: mysql57
+      tags: mysql57
