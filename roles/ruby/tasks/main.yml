@@ -5,6 +5,7 @@
       - readline-devel 
       - zlib-devel 
       - libcurl-devel
+      - bzip2
       - gcc
    tags: install_ruby_lib
 
@@ -43,18 +44,18 @@
    
  - name: "install ruby"
    shell: >
-     rbenv install 2.4.0;
-     rbenv global 2.4.0;
+     sudo -iu root  rbenv install 2.4.0;
+     sudo -iu root  rbenv global 2.4.0;
    tags: install_ruby
 
  - name: "update rubygems"
-   command: gem update --system
+   command: sudo -iu root gem update --system
    tags: update_gem
 
  - name: "install bundler"
-   command: gem install bundler
+   command: sudo -iu root gem install bundler
    tags: install_bundler
  
  - name: "install rake"
-   command: gem install rake
+   command: sudo -iu root gem install rake
    tags: install_rake
