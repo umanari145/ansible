@@ -25,6 +25,7 @@
       - mysql-devel
       - httpd-devel
       - automake
+      - net-tools
       - sysstat
       - iotop
    tags: basic_library
