@@ -1,18 +1,14 @@
- - name: iptables is enabled and started
-   service: name=iptables state=running enabled=yes
-   tags: start_iptables
+ - name: start_firewall
+   systemd:
+     name: firewalld.service
+     state: started
+     daemon_reload: yes
+     enabled: yes
+   tags: start_firewall
 
- - name: iptables
-   command: "cp -ip /etc/sysconfig/iptables /etc/sysconfig/iptables.org "
-   tags: iptables_cp
-
- - lineinfile: dest=/etc/sysconfig/iptables line="-A INPUT -m state --state NEW -m tcp -p tcp --dport {{item}} -j ACCEPT" insertafter="^:OUTPUT" 
+ - firewalld: service={{item}} permanent=true state=enabled immediate=true
    with_items:
-      - 80
-      - 2222
-      - 3306
+      - http
+      - mysqld
+      - ssh
    tags: set_port
-
- - name: restart iptables
-   service: name=iptables state=restarted 
-   tags: restart_iptables
