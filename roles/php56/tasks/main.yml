@@ -46,5 +46,5 @@
     - { pattern: 'group = apache', replaced_value: 'user = nginx'  }
     - { pattern: 'listen = 127.0.0.1:9000', replaced_value: 'listen = /var/run/php-fpm/php-fpm.sock' }
     - { pattern: ';listen.owner = nobody', replaced_value: 'listen.owner = nginx'}
-    - { pattern: ';listen.group = nobody', replaced_value: 'listen.group = ntinx'}
+    - { pattern: ';listen.group = nobody', replaced_value: 'listen.group = nginx'}
    tags: php_fpm_conf_replace
