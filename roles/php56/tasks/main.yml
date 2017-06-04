@@ -17,7 +17,7 @@
       - php-intl
       - php-common
    tags: install_php
-   
+
  - name: 'install_memcached'
    #リポジトリ指定しないと古いリポジトリから読み込んでしまう
    yum: name={{item}} state=latest enablerepo=remi-php56,remi,epel
@@ -25,26 +25,3 @@
       - memcached
       - php-pecl-memcached
    tags: intall_memcached
-
-
- - name: 'install_php-fpm'
-   #リポジトリ指定しないと古いリポジトリから読み込んでしまう
-   yum: name=php-fpm state=latest enablerepo=remi-php56,remi,epel
-   tags: intall_php_fpm
-
- - service: name=php-fpm state=started enabled=yes
-   tags: service_php_fpm
-
- - name: "php-fpm_cp "
-   command: " cp -ip /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.org "
-   tags: php_fpm_cp
-
- - name: php-fpm_conf replace
-   replace: dest='/etc/php-fpm.d/www.conf' regexp='{{item.pattern}}'  replace='{{item.replaced_value}}' backup=no
-   with_items:
-    - { pattern: 'user = apache', replaced_value: 'user = nginx'  }
-    - { pattern: 'group = apache', replaced_value: 'user = nginx'  }
-    - { pattern: 'listen = 127.0.0.1:9000', replaced_value: 'listen = /var/run/php-fpm/php-fpm.sock' }
-    - { pattern: ';listen.owner = nobody', replaced_value: 'listen.owner = nginx'}
-    - { pattern: ';listen.group = nobody', replaced_value: 'listen.group = ntinx'}
-   tags: php_fpm_conf_replace
