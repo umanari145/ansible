@@ -5,6 +5,8 @@
       tags: nginx
     - role: php56
       tags: php56
+    - role: php7
+      tags: php7
     - role: composer
       tags: composer
     - role: mysql
