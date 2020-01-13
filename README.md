@@ -3,12 +3,12 @@ ansible recipe
 
 ## ansibleインストール
 
-** CentOS **
+**CentOS**
 ```
 yum install epel-release
 yum -y install ansible
 ```
-** Mac **
+**Mac**
 <br>
 ```
 brew install ansible
