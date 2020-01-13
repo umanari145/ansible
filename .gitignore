@@ -1,3 +1,4 @@
 /vars/hostlist
 /roles/mysql/vars/main.yml
 hostfile
+/roles/nginx/vars/main.yml

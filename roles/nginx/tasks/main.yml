@@ -6,14 +6,14 @@
    yum: name=nginx state=latest enablerepo=nginx
    tags: install_nginx
 
- - template: src=./template/nginx.j2 dest=/etc/nginx/conf.d/{{item.hostname}}.conf owner=nginx group=nginx mode=0644
+ - template: src=./template/autoreserve.j2 dest=/etc/nginx/conf.d/{{item.hostname}}.conf owner=nginx group=nginx mode=0644
    with_items:
-    - { hostname: 'sample_host' }
+    - { hostname: "{{hostname}}" , root_dir: "{{root_dir}}"}
    tags: nginx_conf
 
  - name: 'install_php-fpm'
    #リポジトリ指定しないと古いリポジトリから読み込んでしまう
-   yum: name=php-fpm state=latest enablerepo=remi-php56,remi,epel
+   yum: name=php-fpm state=latest enablerepo=remi-php74,remi,epel
    tags: intall_php_fpm
 
  - service: name=php-fpm state=started enabled=yes
