@@ -4,12 +4,9 @@ server {
     #charset koi8-r;
 
     #access_log  /var/log/nginx/log/host.access.log  main;
-    access_log  /var/log/nginx/{{item.hostname}}.access.log;
-    error_log  /var/log/nginx/{{item.hostname}}.error.log  warn;
-
 
     location / {
-        root   /var/www/html/{{item.root_dir}};
+        root   /var/www/html;
         index  index.html index.htm;
     }
 
@@ -32,19 +29,24 @@ server {
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     #
 
-    location ~ \.php$ {
-        root           html;
+    location ~ /autoreserve/(.*)$ {
+        root /var/www/html;
         auth_basic  "QS Beta TEST";
         auth_basic_user_file "/var/www/html/{{item.root_dir}}/.htpasswd";
-        fastcgi_pass   127.0.0.1:9000;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /var/www/html/{{item.root_dir}}/$fastcgi_script_name;
-        include        fastcgi_params;
+        index  index.php index.html;
+        fastcgi_pass    unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_index   index.php;
+        fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include         fastcgi_params;
+
         fastcgi_buffer_size 128k;
         fastcgi_buffers 4 256k;
         fastcgi_busy_buffers_size 256k;
         fastcgi_temp_file_write_size 256k;
         proxy_no_cache 1;
+
+        access_log  /var/log/nginx/{{item.hostname}}.access.log;
+        error_log  /var/log/nginx/{{item.hostname}}.error.log  warn;
 
     }
 
