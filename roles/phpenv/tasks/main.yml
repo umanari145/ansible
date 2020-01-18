@@ -1,0 +1,51 @@
+ - name: "install phpenv"
+   shell: >
+    curl -L https://raw.github.com/CHH/phpenv/master/bin/phpenv-install.sh | bash;
+    git clone https://github.com/CHH/php-build.git ~/.phpenv/plugins/php-build
+   tags: install_phpenv
+
+ - name: "source phpenv"
+   lineinfile:
+    dest=~/.bash_profile
+    line={{ item }}
+   with_items:
+    - 'PHPENV_ROOT=$HOME/.phpenv'
+    - 'PATH="$PHPENV_ROOT/bin:$PATH"'
+    - 'eval "$(phpenv init -)"'
+   tags: regist_phpenv_profile
+
+ - name: read .bash_profile
+   shell: source ~/.bash_profile
+   tags: source_phpenv_profile
+
+ - name: "phpenv library"
+   yum: name={{item}} state=latest
+   with_items:
+      - libxml2
+      - libxml2-devel
+      - libcurl
+      - libcurl-devel
+      - libpng
+      - libpng-devel
+      - libmcrypt
+      - libmcrypt-devel
+      - libtidy
+      - libtidy-devel
+      - libxslt
+      - libxslt-devel
+      - bison
+      - libjpeg-turbo-devel
+      - readline-devel
+      - bzip2-devel
+      - re2c
+      - libevent*
+      - libicu-devel
+   tags: phpenv_library
+
+ - name: "phpenv_php_install"
+   shell: source ~/.bash_profile && cd {{project_dir}} && phpenv install {{phpenv_version}} && phpenv local {{phpenv_version}}
+   tags: phpenv_php_install
+
+ - name: "phpenv_nginx_install"
+   shell: source ~/.bash_profile && cd /root/.phpenv/versions/{{phpenv_version}}/bin && ln -s ../sbin/php-fpm php-fpm && phpenv rehash
+   tags: phpenv_nginx_install

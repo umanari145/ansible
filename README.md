@@ -31,6 +31,7 @@ ansible-playbook -i hostfile start.yml  -u(ユーザー名) -k
 特定のtagのみを実行させたい時
 ```
 ansible-playbook -i hostfile start.yml --tags "basic"
+ansible-playbook -i hostfile php.yml --tags "composer,mysql"
 ```
 
 特定のtagのみを実行させたくない時

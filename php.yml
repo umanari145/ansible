@@ -7,6 +7,8 @@
       tags: php56
     - role: php7
       tags: php7
+    - role: phpenv
+      tags: phpenv
     - role: composer
       tags: composer
     - role: mysql

@@ -2,3 +2,4 @@
 /roles/mysql/vars/main.yml
 hostfile
 /roles/nginx/vars/main.yml
+/roles/phpenv/vars/main.yml
