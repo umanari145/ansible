@@ -27,6 +27,7 @@
       - mysql-devel
       - httpd-devel
       - automake
+      - net-tools
       - sysstat
       - iotop
    tags: basic_library
@@ -35,5 +36,5 @@
    yum: name={{item}}
    with_items:
       - epel-release
-      - http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
+      - http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
    tags: repo
