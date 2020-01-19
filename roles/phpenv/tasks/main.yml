@@ -46,6 +46,6 @@
    shell: source ~/.bash_profile && cd {{project_dir}} && phpenv install {{phpenv_version}} && phpenv local {{phpenv_version}}
    tags: phpenv_php_install
 
- - name: "phpenv_nginx_install"
-   shell: source ~/.bash_profile && cd /root/.phpenv/versions/{{phpenv_version}}/bin && ln -s ../sbin/php-fpm php-fpm && phpenv rehash
-   tags: phpenv_nginx_install
+ - name: "phpenv_php_fpm_install"
+   shell: source ~/.bash_profile && cd ~/.phpenv/versions/{{phpenv_version}}/bin && ln -s ../sbin/php-fpm php-fpm && phpenv rehash
+   tags: phpenv_php_fpm_install
