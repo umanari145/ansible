@@ -46,6 +46,11 @@ ansible-playbook -i hostfile php.yml --tags "composer,mysql"
 ```
 ansible-playbook -i hostfile start.yml --skip-tags "basic"
 ```
+実際によく使うパターン
+```
+ ansible-playbook -i hostfile --user=ec2-user --private-key=(AWSの鍵パス)  aws_start.yml --tags "aws_repo"
+```
+
 ### hostfile
 ターゲットサーバーのIP
 自分自身は127.0.0.1
