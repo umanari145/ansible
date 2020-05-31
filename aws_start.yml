@@ -3,11 +3,7 @@
   roles:
     - role: basic
       tags: basic
-    - role: repo
-      tags: repo
-    - role: useradd
-      tags: useradd
+    - role: aws_repo
+      tags: aws_repo
     - role: vim
       tags: vim
-    - role: ssh
-      tags: ssh

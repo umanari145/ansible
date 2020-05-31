@@ -1,0 +1,6 @@
+ - name: "repository"
+   yum: name={{item}}
+   with_items:
+      - epel-release
+      - http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+   tags: each_repo
