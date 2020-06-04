@@ -51,6 +51,11 @@ ansible-playbook -i hostfile start.yml --skip-tags "basic"
  ansible-playbook -i hostfile --user=ec2-user --private-key=(AWSの鍵パス)  aws_start.yml --tags "aws_repo"
 ```
 
+ローカルへのインストール hostfileのtargetは127.0.0.1を記述
+```
+ansible-playbook -i hostfile --connection=local  start.yml --tags "basic"
+```
+
 ### hostfile
 ターゲットサーバーのIP
 自分自身は127.0.0.1
