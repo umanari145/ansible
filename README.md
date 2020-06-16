@@ -56,6 +56,12 @@ ansible-playbook -i hostfile start.yml --skip-tags "basic"
 ansible-playbook -i hostfile --connection=local  start.yml --tags "basic"
 ```
 
+### Docker + ansible
+Dockerをansibleで作る
+https://qiita.com/soichiro0311/items/5d5fb00d03c4bba994eb
+ansibleファイルをd同階層におくことでコンテナ内へのログインの手間が省ける
+
+
 ### hostfile
 ターゲットサーバーのIP
 自分自身は127.0.0.1
