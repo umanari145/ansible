@@ -18,7 +18,7 @@ brew install ansible
 ## 実行コマンド
 
 単純な一通りのインストールだけならリモートではなく、<br>
-サーバーに直にログインして、下記コマンド群を実行した方が良い
+サーバーに直にログインして、下記コマンド群を実行しても良い
 
 その場合、hostfileのtargetは127.0.0.1になる
 
@@ -46,7 +46,7 @@ ansible-playbook -i hostfile php.yml --tags "composer,mysql"
 ```
 ansible-playbook -i hostfile start.yml --skip-tags "basic"
 ```
-実際によく使うパターン
+実際によく使うパターン(awsはもちろんリモート)
 ```
  ansible-playbook -i hostfile --user=ec2-user --private-key=(AWSの鍵パス)  aws_start.yml --tags "aws_repo"
 ```
@@ -75,6 +75,7 @@ ansibleファイルを同階層におくことでコンテナ内へのログイ�
 - composer
 - cpan WMS用のcpan
 - cron DBバックアップや監視ログ系の処理全般のcron
+- docker dockerのインストール
 - git yumでなく最新版のgit var:gitのユーザー情報
 - logrotate iotop,ps,wmslogなどのrotate
 - mysql yum標準のmysqlインストール+設定ファイル更新 DB作成まで(`etc/my.cnf`) var:ユーザー情報など

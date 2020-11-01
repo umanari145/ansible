@@ -1,0 +1,34 @@
+  - name: Add Docker repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docer-ce.repo
+    tags: docker_repo
+
+  - name: Enable Docker Stable repo
+    ini_file:
+      dest: /etc/yum.repos.d/docer-ce.repo
+      section: "docker-ce-stable"
+      option: enabled
+      value: "1"
+    tags: docker_stable
+
+  - name: Install docker
+    yum:
+      name: "docker-ce,docker-ce-cli,containerd.io"
+      state: latest
+    tags: docker_install
+
+  - name: Download Docker Compose
+    get_url: 
+      url: https://github.com/docker/compose/releases/download/{{docker_version}}/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 0511
+    tags: docker_composer
+
+  - name: Start/Enable docker
+    systemd:
+      name: docker
+      state: started
+      daemon_reload: no
+      enabled: yes
+    tags: docker_enable      

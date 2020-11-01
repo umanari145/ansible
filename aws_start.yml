@@ -7,3 +7,5 @@
       tags: aws_repo
     - role: vim
       tags: vim
+    - role: docker
+      tags: docker

@@ -11,3 +11,5 @@
       tags: vim
     - role: ssh
       tags: ssh
+    - role: docker
+      tags: docker
